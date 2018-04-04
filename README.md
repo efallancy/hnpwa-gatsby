@@ -19,7 +19,7 @@ And run the following for development:
 # NPM
 npm run develop
 
-#yarn
+# yarn
 yarn develop
 ```
 

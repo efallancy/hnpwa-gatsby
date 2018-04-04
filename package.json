@@ -21,7 +21,8 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier-eslint --write 'src/**/*.js'",
-    "precommit": "npm run format"
+    "precommit": "npm run format",
+    "serve": "gatsby serve"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
