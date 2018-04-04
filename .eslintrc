@@ -1,0 +1,5 @@
+{
+  "extends": ["google", "plugin:react/recommended"],
+  "plugins": ["react"],
+  "parser": "babel-eslint"
+}
