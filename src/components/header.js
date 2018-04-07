@@ -34,24 +34,19 @@ const Header = () => (
         padding: '1.45rem 1.0875rem',
       }}
     >
-      {
-        links.map((link, index) =>
-          <p
-            css={{color: '#dcdcdc'}}
-            key={index}
+      {links.map((link, index) => (
+        <p css={{color: '#dcdcdc'}} key={index}>
+          <Link
+            to={link.url}
+            style={{
+              color: 'white',
+              textDecoration: 'none',
+            }}
           >
-            <Link
-              to={link.url}
-              style={{
-                color: 'white',
-                textDecoration: 'none',
-              }}
-            >
-              {link.text}
-            </Link>
-          </p>
-        )
-      }
+            {link.text}
+          </Link>
+        </p>
+      ))}
     </nav>
   </div>
 );

@@ -8,9 +8,11 @@ const Link = ({to, ...props}) => {
     isExternalLink = true;
   }
 
-  return isExternalLink ?
-    <a href={to} {...props} /> :
-    <GatsbyLink to={to} {...props} />;
+  return isExternalLink ? (
+    <a href={to} {...props} />
+  ) : (
+    <GatsbyLink to={to} {...props} />
+  );
 };
 
 Link.propTypes = {
