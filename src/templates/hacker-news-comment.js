@@ -1,31 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const HackerNewsComment = ({pathContext}) =>
+const HackerNewsComment = ({pathContext}) => (
   <div>
     <h1>{pathContext.title}</h1>
-    <p>{pathContext.by} - {pathContext.createdAt}</p>
+    <p>
+      {pathContext.by} - {pathContext.createdAt}
+    </p>
     <div css={{margin: '1rem 0'}}>
-      {
-        pathContext.comments.map(
-          (comment, index) =>
-            <div
-              key={index}
-              css={{
-                padding: '1rem 1.5rem',
-              }}
-            >
-              <pre>
-                {comment.text}
-              </pre>
-              <p>
-                <em>{comment.by}</em> - {comment.timeISO}
-              </p>
-            </div>
-        )
-      }
+      {pathContext.comments.map((comment, index) => (
+        <div
+          key={index}
+          css={{
+            padding: '1rem 1.5rem',
+          }}
+        >
+          <pre>{comment.text}</pre>
+          <p>
+            <em>{comment.by}</em> - {comment.timeISO}
+          </p>
+        </div>
+      ))}
     </div>
-  </div>;
+  </div>
+);
 
 HackerNewsComment.propTypes = {
   pathContext: PropTypes.shape({
