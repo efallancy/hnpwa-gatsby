@@ -4,8 +4,12 @@ import Link from './link';
 
 const links = [
   {
-    text: 'NEWS',
-    url: '/news',
+    text: 'TOP',
+    url: '/top',
+  },
+  {
+    text: 'NEW',
+    url: '/new',
   },
   {
     text: 'SHOW',
@@ -16,8 +20,8 @@ const links = [
     url: '/ask',
   },
   {
-    text: 'JOBS',
-    url: '/jobs',
+    text: 'JOB',
+    url: '/job',
   },
 ];
 

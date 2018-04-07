@@ -11,7 +11,7 @@ const get = (query) =>
 
 const createHnNode = (
   stories,
-  storyType,
+  storyCategory,
   createNode
 ) => {
   stories.filter(
@@ -41,11 +41,12 @@ const createHnNode = (
 
     const storyNode = {
       ...kidLessStory,
+      category: `${storyCategory}HnStory`,
       children: kids.kids.map((k) => k.id),
       parent: `__SOURCE__`,
       content: storyStr,
       internal: {
-        type: storyType,
+        type: 'HnStory',
       },
       domain,
       order: i + 1,
@@ -74,10 +75,11 @@ const createHnNode = (
         }
         let commentNode = {
           ..._.omit(comment, `kids`),
+          category: `${storyCategory}HnComment`,
           children: comment.kids.map((k) => k.id),
           parent,
           internal: {
-            type: `${storyType}Comment`,
+            type: `HnComment`,
           },
           order: i + 1,
         };
@@ -104,6 +106,50 @@ const createHnNode = (
 
     createCommentNodes(kids.kids, story.id);
   });
+};
+
+const createPaginatedHnCategoryPage = (
+  stories = [],
+  category = 'TopHnStory',
+  limit = 10,
+  skip = 0,
+  depth = 1,
+  templatePath,
+  createPage,
+  createRedirect
+) => {
+  const paginatedStories = stories.slice(skip, (skip + limit) - 1);
+
+  const categoryPath = category.toLowerCase().replace(/hnstory/, '');
+  const urlPath = `/${categoryPath}${depth === 1 ? '' : `/${depth}`}`;
+  createPage({
+    path: urlPath,
+    component: path.resolve(templatePath),
+    context: {
+      stories: paginatedStories,
+    },
+  });
+
+  if (depth === 1) {
+    createRedirect({
+      fromPath: `${urlPath}/1`,
+      toPath: urlPath,
+      isPermanent: true,
+    });
+  }
+
+  if (limit + skip <= stories.length) {
+    createPaginatedHnCategoryPage(
+      stories,
+      category,
+      limit,
+      (skip + limit) - 1,
+      depth + 1,
+      templatePath,
+      createPage,
+      createRedirect
+    );
+  }
 };
 
 exports.sourceNodes = async ({
@@ -175,39 +221,96 @@ fragment storiesFragment on HackerNewsItem {
   const askStories = result.data.data.hn.askStories;
   const jobStories = result.data.data.hn.jobStories;
 
-  createHnNode(topStories, 'TopHnStory', createNode);
-  createHnNode(newStories, 'NewHnStory', createNode);
-  createHnNode(showStories, 'ShowHnStory', createNode);
-  createHnNode(askStories, 'AskHnStory', createNode);
-  createHnNode(jobStories, 'JobHnStory', createNode);
+  createHnNode(topStories, 'Top', createNode);
+  createHnNode(newStories, 'New', createNode);
+  createHnNode(showStories, 'Show', createNode);
+  createHnNode(askStories, 'Ask', createNode);
+  createHnNode(jobStories, 'Job', createNode);
 
   return;
 };
 
-const createPages = ({graphql, boundActionCreators}) => {
-  const {createPages} = boundActionCreators;
+exports.createPages = ({graphql, boundActionCreators}) => {
+  const {createPage, createRedirect} = boundActionCreators;
 
   return new Promise((resolve, reject) => {
-    const hackerNewsTemplate = path.resolve('./src/templates/hacker-news.js');
+    const hackerNewsCategoryTemplate = path.resolve(
+      './src/templates/hacker-news-category.js'
+    );
+
+    const hackerNewsCommentTemplate = path.resolve(
+      './src/templates/hacker-news-comment.js'
+    );
 
     graphql(`
       {
-        allHnStory(sort: { fields: [order] }) {
+        allHnStory (sort: {fields: [order]}) {
           edges {
             node {
+              id
+              by
               title
               url
               score
               order
               domain
-              timeISO(fromNow: true)
+              category
+              descendants
+              timeISO (fromNow: true)
+              childrenHnComment {
+                text
+                by
+                timeISO(fromNow: true)
+              }
             }
           }
         }
       }
     `).then((res) => {
-      const allHnStoryNodes = data.edges;
-      console.log('Nodes', allHnStoryNodes.length);
+      let nodeCategory = {};
+      const allHnStoryEdges = res.data.allHnStory.edges;
+
+      allHnStoryEdges.forEach((edge) => {
+        const node = edge.node;
+
+        if (nodeCategory[node.category]) {
+          nodeCategory[node.category].push(node);
+        } else {
+          nodeCategory[node.category] = [node];
+        }
+
+        createPage({
+          path: `/${node.id}/comments`,
+          component: path.resolve(hackerNewsCommentTemplate),
+          context: {
+            title: node.title,
+            createdAt: node.timeISO,
+            by: node.by,
+            comments: node.childrenHnComment,
+          },
+        });
+      });
+
+      Object.keys(nodeCategory).forEach((category) => {
+        createPaginatedHnCategoryPage(
+          nodeCategory[category],
+          category,
+          10,
+          0,
+          1,
+          hackerNewsCategoryTemplate,
+          createPage,
+          createRedirect
+        );
+      });
+
+      // Redirect homepage to Top HN Story
+      createRedirect({
+        fromPath: `/`,
+        toPath: '/top',
+        isPermanent: true,
+      });
+
       resolve();
     });
   });
