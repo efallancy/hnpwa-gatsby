@@ -7,6 +7,5 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-glamor',
     'gatsby-plugin-offline',
-    'gatsby-source-hacker-news',
   ],
 };
