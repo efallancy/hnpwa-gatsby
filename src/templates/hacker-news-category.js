@@ -35,8 +35,9 @@ const HackerNewsCategoryTemplate = ({pathContext: {stories}}) => (
             <a href={story.url}>{story.title}</a>
           </h3>
           <p>
-            <em>{story.by}</em> - {story.timeISO}&nbsp;
-            ({story.descendants || 0} comments)
+            <em>{story.by}</em> - {story.timeISO}&nbsp; ({story.descendants ||
+              0}{' '}
+            comments)
           </p>
         </div>
       </div>
