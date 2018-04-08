@@ -8,10 +8,10 @@ import '../styles/reset.css';
 const TemplateWrapper = ({children}) => (
   <div>
     <Helmet
-      title="Gatsby Default Starter"
+      title="Hacker News - Gatsby"
       meta={[
-        {name: 'description', content: 'Sample'},
-        {name: 'keywords', content: 'sample, something'},
+        {name: 'description', content: 'Hacker News app built with GatsbyJS'},
+        {name: 'keywords', content: 'pwa, hacker news, gatsbyjs'},
       ]}
     />
     <Header />

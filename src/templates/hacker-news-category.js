@@ -14,14 +14,31 @@ const HackerNewsCategoryTemplate = ({pathContext: {stories}}) => (
           padding: '1rem 1.5rem',
           margin: '1rem 0',
           borderBottom: '1px solid #bdbdbd',
+          width: '100%',
         }}
       >
-        <h3>
-          <a href={story.url}>{story.title}</a>
-        </h3>
-        <p>
-          <em>{story.by}</em> - {story.timeISO}
-        </p>
+        <div
+          css={{
+            width: '128px',
+            display: 'inline-block',
+          }}
+        >
+          <p>{story.score}</p>
+        </div>
+        <div
+          css={{
+            width: 'calc(100% - 128px)',
+            display: 'inline-block',
+          }}
+        >
+          <h3>
+            <a href={story.url}>{story.title}</a>
+          </h3>
+          <p>
+            <em>{story.by}</em> - {story.timeISO}&nbsp;
+            ({story.descendants || 0} comments)
+          </p>
+        </div>
       </div>
     ))}
   </div>
