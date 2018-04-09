@@ -9,103 +9,99 @@ const get = (query) =>
     `https://www.graphqlhub.com/graphql?query=${encodeURIComponent(query)}`
   );
 
-const createHnNode = (
-  stories,
-  storyCategory,
-  createNode
-) => {
-  stories.filter(
-    (story) => story !== null && story !== undefined
-  ).forEach((story, i) => {
-    const storyStr = JSON.stringify(story);
+const createHnNode = (stories, storyCategory, createNode) => {
+  stories
+    .filter((story) => story !== null && story !== undefined)
+    .forEach((story, i) => {
+      const storyStr = JSON.stringify(story);
 
-    // Ask HN, Polls, etc. don't have urls.
-    // For those that do, HN displays just the bare domain.
-    let domain;
-    if (story.url) {
-      const parsedUrl = url.parse(story.url);
-      const splitHost = parsedUrl.host.split(`.`);
-      if (splitHost.length > 2) {
-        domain = splitHost.slice(1).join(`.`);
-      } else {
-        domain = splitHost.join(`.`);
+      // Ask HN, Polls, etc. don't have urls.
+      // For those that do, HN displays just the bare domain.
+      let domain;
+      if (story.url) {
+        const parsedUrl = url.parse(story.url);
+        const splitHost = parsedUrl.host.split(`.`);
+        if (splitHost.length > 2) {
+          domain = splitHost.slice(1).join(`.`);
+        } else {
+          domain = splitHost.join(`.`);
+        }
       }
-    }
 
-    let kids;
-    kids = _.pick(story, `kids`);
-    if (!kids.kids) {
-      kids.kids = [];
-    }
-    const kidLessStory = _.omit(story, `kids`);
+      let kids;
+      kids = _.pick(story, `kids`);
+      if (!kids.kids) {
+        kids.kids = [];
+      }
+      const kidLessStory = _.omit(story, `kids`);
 
-    const storyNode = {
-      ...kidLessStory,
-      category: `${storyCategory}HnStory`,
-      children: kids.kids.map((k) => k.id),
-      parent: `__SOURCE__`,
-      content: storyStr,
-      internal: {
-        type: 'HnStory',
-      },
-      domain,
-      order: i + 1,
-    };
+      const storyNode = {
+        ...kidLessStory,
+        category: `${storyCategory}HnStory`,
+        children: kids.kids.map((k) => k.id),
+        parent: `__SOURCE__`,
+        content: storyStr,
+        internal: {
+          type: 'HnStory',
+        },
+        domain,
+        order: i + 1,
+      };
 
-    // Just store the user id
-    storyNode.by = storyNode.by.id;
+      // Just store the user id
+      storyNode.by = storyNode.by.id;
 
-    // Get content digest of node.
-    const contentDigest = crypto
-      .createHash(`md5`)
-      .update(JSON.stringify(storyNode))
-      .digest(`hex`);
+      // Get content digest of node.
+      const contentDigest = crypto
+        .createHash(`md5`)
+        .update(JSON.stringify(storyNode))
+        .digest(`hex`);
 
-    storyNode.internal.contentDigest = contentDigest;
+      storyNode.internal.contentDigest = contentDigest;
 
-    createNode(storyNode);
+      createNode(storyNode);
 
-    // Recursively create comment nodes.
-    const createCommentNodes = (comments, parent, depth = 0) => {
-      comments.filter(
-        (comment) => comment !== null && comment !== undefined
-      ).forEach((comment, i) => {
-        if (!comment.kids) {
-          comment.kids = [];
-        }
-        let commentNode = {
-          ..._.omit(comment, `kids`),
-          category: `${storyCategory}HnComment`,
-          children: comment.kids.map((k) => k.id),
-          parent,
-          internal: {
-            type: `HnComment`,
-          },
-          order: i + 1,
-        };
+      // Recursively create comment nodes.
+      const createCommentNodes = (comments, parent, depth = 0) => {
+        comments
+          .filter((comment) => comment !== null && comment !== undefined)
+          .forEach((comment, i) => {
+            if (!comment.kids) {
+              comment.kids = [];
+            }
+            let commentNode = {
+              ..._.omit(comment, `kids`),
+              category: `${storyCategory}HnComment`,
+              children: comment.kids.map((k) => k.id),
+              parent,
+              internal: {
+                type: `HnComment`,
+              },
+              order: i + 1,
+            };
 
-        commentNode.by = commentNode.by.id;
-        const nodeStr = JSON.stringify(commentNode);
+            commentNode.by = commentNode.by.id;
+            const nodeStr = JSON.stringify(commentNode);
 
-        // Get content digest of comment node.
-        const contentDigest = crypto
-          .createHash(`md5`)
-          .update(nodeStr)
-          .digest(`hex`);
+            // Get content digest of comment node.
+            const contentDigest = crypto
+              .createHash(`md5`)
+              .update(nodeStr)
+              .digest(`hex`);
 
-        commentNode.internal.contentDigest = contentDigest;
-        commentNode.internal.content = nodeStr;
+            commentNode.internal.contentDigest = contentDigest;
+            commentNode.internal.content = nodeStr;
 
-        createNode(commentNode);
+            createNode(commentNode);
 
-        if (comment.kids.length > 0) {
-          createCommentNodes(comment.kids, comment.id, depth + 1);
-        }
-      });
-    };
+            if (comment.kids.length > 0) {
+              createCommentNodes(comment.kids, comment.id, depth + 1);
+            }
+          });
+      };
 
-    createCommentNodes(kids.kids, story.id);
-  });
+      createCommentNodes(kids.kids, story.id);
+    });
 };
 
 const createPaginatedHnCategoryPage = (
@@ -118,7 +114,7 @@ const createPaginatedHnCategoryPage = (
   createPage,
   createRedirect
 ) => {
-  const paginatedStories = stories.slice(skip, (skip + limit) - 1);
+  const paginatedStories = stories.slice(skip, skip + limit - 1);
 
   const categoryPath = category.toLowerCase().replace(/hnstory/, '');
   const urlPath = `/${categoryPath}${depth === 1 ? '' : `/${depth}`}`;
@@ -143,7 +139,7 @@ const createPaginatedHnCategoryPage = (
       stories,
       category,
       limit,
-      (skip + limit) - 1,
+      skip + limit - 1,
       depth + 1,
       templatePath,
       createPage,
@@ -213,7 +209,6 @@ fragment storiesFragment on HackerNewsItem {
   );
   console.timeEnd(`fetch HN data`);
 
-
   // Create story nodes.
   const topStories = result.data.data.hn.topStories;
   const newStories = result.data.data.hn.newStories;
@@ -244,7 +239,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
 
     graphql(`
       {
-        allHnStory (sort: {fields: [order]}) {
+        allHnStory(sort: { fields: [order] }) {
           edges {
             node {
               id
@@ -256,7 +251,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
               domain
               category
               descendants
-              timeISO (fromNow: true)
+              timeISO(fromNow: true)
               childrenHnComment {
                 text
                 by

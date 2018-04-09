@@ -24,7 +24,7 @@
     "format:all": "npm run format:src && npm run format:gatsby",
     "format:src": "prettier-eslint --write 'src/**/*.js'",
     "format:gatsby": "prettier-eslint --write 'gatsby-*.js'",
-    "precommit": "npm run format",
+    "precommit": "npm run format:all",
     "serve": "gatsby serve"
   },
   "lint-staged": {

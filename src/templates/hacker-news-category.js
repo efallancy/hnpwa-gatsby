@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const LinkTag = ({href, children, ...props}) =>
-  href ?
-    <a href={href} {...props}>{children}</a> :
-    <span {...props}>{children}</span>;
+  href ? (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  ) : (
+    <span {...props}>{children}</span>
+  );
 
 const HackerNewsCategoryTemplate = ({pathContext: {stories}}) => (
   <div
@@ -75,9 +79,7 @@ const HackerNewsCategoryTemplate = ({pathContext: {stories}}) => (
               margin: '0',
             }}
           >
-            {story.by} - {story.timeISO} - ({story.descendants ||
-              0}{' '}
-            comments)
+            {story.by} - {story.timeISO} - ({story.descendants || 0} comments)
           </p>
         </div>
       </div>
