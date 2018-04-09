@@ -26,7 +26,7 @@ const links = [
 ];
 
 const Header = () => (
-  <div
+  <header
     css={{
       backgroundColor: '#25CED1',
     }}
@@ -34,17 +34,24 @@ const Header = () => (
     <nav
       css={{
         margin: '0 auto',
-        maxWidth: '1024px',
-        padding: '1.45rem 1.0875rem',
+        padding: '2rem',
       }}
     >
       {links.map((link, index) => (
-        <p css={{color: '#dcdcdc'}} key={index}>
+        <p
+          key={index}
+          css={{
+            display: 'inline-block',
+            fontSize: '1.8rem',
+            margin: '0',
+          }}
+        >
           <Link
             to={link.url}
-            style={{
+            css={{
               color: 'white',
               textDecoration: 'none',
+              marginRight: '15rem',
             }}
           >
             {link.text}
@@ -52,7 +59,7 @@ const Header = () => (
         </p>
       ))}
     </nav>
-  </div>
+  </header>
 );
 
 export default Header;

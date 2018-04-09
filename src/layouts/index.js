@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import Header from '../components/header';
+import 'glamor/reset';
 import '../styles/reset.css';
 
 const TemplateWrapper = ({children}) => (

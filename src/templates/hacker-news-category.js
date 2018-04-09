@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const LinkTag = ({href, children, ...props}) =>
+  href ?
+    <a href={href} {...props}>{children}</a> :
+    <span {...props}>{children}</span>;
+
 const HackerNewsCategoryTemplate = ({pathContext: {stories}}) => (
   <div
     css={{
+      marginTop: '2rem',
       maxWidth: '1024px',
     }}
   >
@@ -11,31 +17,65 @@ const HackerNewsCategoryTemplate = ({pathContext: {stories}}) => (
       <div
         key={index}
         css={{
-          padding: '1rem 1.5rem',
-          margin: '1rem 0',
-          borderBottom: '1px solid #bdbdbd',
+          alignItems: 'center',
+          backgroundColor: '#fffffc',
+          border: '1px solid #bdbdbd',
+          borderRadius: '5px',
+          display: 'flex',
+          margin: '0 0 2rem',
+          padding: '2rem 0',
           width: '100%',
         }}
       >
         <div
           css={{
-            width: '128px',
             display: 'inline-block',
+            padding: '0 1rem 0 2rem',
+            width: '85px',
           }}
         >
-          <p>{story.score}</p>
+          <p
+            css={{
+              color: '#25ced1',
+              fontSize: '2rem',
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}
+          >
+            {story.score}
+          </p>
         </div>
         <div
           css={{
-            width: 'calc(100% - 128px)',
             display: 'inline-block',
+            padding: '0 2rem 0 1rem',
+            width: 'calc(100% - 80px)',
           }}
         >
-          <h3>
-            <a href={story.url}>{story.title}</a>
-          </h3>
-          <p>
-            <em>{story.by}</em> - {story.timeISO}&nbsp; ({story.descendants ||
+          <p
+            css={{
+              fontSize: '1.8rem',
+              marginBottom: '0.6rem',
+            }}
+          >
+            <LinkTag
+              href={story.url}
+              css={{
+                color: 'rgba(0, 0, 0, 0.85)',
+                textDecoration: 'none',
+              }}
+            >
+              {story.title}
+            </LinkTag>
+          </p>
+          <p
+            css={{
+              color: '#979797',
+              lineHeight: '1.5',
+              margin: '0',
+            }}
+          >
+            {story.by} - {story.timeISO} - ({story.descendants ||
               0}{' '}
             comments)
           </p>

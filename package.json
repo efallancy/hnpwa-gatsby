@@ -21,15 +21,15 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier-eslint --write 'src/**/*.js'",
+    "format:all": "npm run format:src && npm run format:gatsby",
+    "format:src": "prettier-eslint --write 'src/**/*.js'",
     "format:gatsby": "prettier-eslint --write 'gatsby-*.js'",
     "precommit": "npm run format",
     "serve": "gatsby serve"
   },
   "lint-staged": {
     "*.js": [
-      "npm run format",
-      "npm run format:gatsby",
+      "npm run format:all",
       "git add"
     ]
   },
