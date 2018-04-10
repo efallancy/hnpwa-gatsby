@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Link from './link';
 
@@ -29,7 +30,13 @@ const links = [
   },
 ];
 
-const Header = () => (
+const getMatchingPathIndex = (url, pathname) => {
+  const splitPath = pathname.split('/').filter((item) => !!item);
+
+  return splitPath.length && url.includes(splitPath[0]);
+};
+
+const Header = ({location}) => (
   <header
     css={{
       backgroundColor: '#25CED1',
@@ -58,7 +65,9 @@ const Header = () => (
           <Link
             to={link.url}
             css={{
-              color: 'white',
+              color: getMatchingPathIndex(link.url, location.pathname) ?
+                '#0274b3' :
+                'white',
               textDecoration: 'none',
             }}
           >
@@ -69,5 +78,9 @@ const Header = () => (
     </nav>
   </header>
 );
+
+Header.propTypes = {
+  location: PropTypes.object,
+}
 
 export default Header;

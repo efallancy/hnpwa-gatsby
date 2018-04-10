@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Link from './link';
+
 const LinkTag = ({href, children, ...props}) =>
   href ? (
     <a href={href} {...props}>
@@ -10,7 +12,16 @@ const LinkTag = ({href, children, ...props}) =>
     <span {...props}>{children}</span>
   );
 
-const StoryList = ({score, url, title, by, timeISO, descendants, domain}) => (
+const StoryList = ({
+  id,
+  score,
+  url,
+  title,
+  by,
+  timeISO,
+  descendants,
+  domain,
+}) => (
   <div
     css={{
       alignItems: 'center',
@@ -71,7 +82,17 @@ const StoryList = ({score, url, title, by, timeISO, descendants, domain}) => (
           margin: '0',
         }}
       >
-        {by} - {timeISO} - {descendants || 0} comments{' '}
+        {by} - {timeISO} - {' '}
+        <Link
+          to={`/${id}/comments`}
+          css={{
+            color: '#25ced1',
+            textDecoration: 'none',
+          }}
+        >
+          {descendants || 0}{' '}
+          {descendants && descendants > 1 ? 'comments' : 'comment'}
+        </Link>{' '}
         {(domain && `- (${domain})`) || ''}
       </p>
     </div>
@@ -80,7 +101,7 @@ const StoryList = ({score, url, title, by, timeISO, descendants, domain}) => (
 
 LinkTag.propTypes = {
   href: PropTypes.string,
-  children: PropTypes.array,
+  children: PropTypes.any,
 };
 
 StoryList.propTypes = {

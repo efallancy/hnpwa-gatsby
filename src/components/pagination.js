@@ -61,7 +61,6 @@ const Pagination = ({
 }) => (
   <div
     css={{
-      fontSize: '1.8rem',
       maxWidth: '300px',
       margin: '0 auto 2rem',
       padding: '1rem 1.5rem',

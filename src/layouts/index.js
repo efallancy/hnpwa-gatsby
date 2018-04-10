@@ -6,7 +6,7 @@ import Header from '../components/header';
 import 'glamor/reset';
 import '../styles/reset.css';
 
-const TemplateWrapper = ({children}) => (
+const TemplateWrapper = ({children, location}) => (
   <div>
     <Helmet
       title="Hacker News - Gatsby"
@@ -15,7 +15,7 @@ const TemplateWrapper = ({children}) => (
         {name: 'keywords', content: 'pwa, hacker news, gatsbyjs'},
       ]}
     />
-    <Header />
+    <Header location={location} />
     <div
       css={{
         margin: '0 auto',
@@ -30,6 +30,7 @@ const TemplateWrapper = ({children}) => (
 
 TemplateWrapper.propTypes = {
   children: PropTypes.func,
+  location: PropTypes.object,
 };
 
 export default TemplateWrapper;
