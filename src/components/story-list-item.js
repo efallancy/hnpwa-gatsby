@@ -10,15 +10,7 @@ const LinkTag = ({href, children, ...props}) =>
     <span {...props}>{children}</span>
   );
 
-const StoryList = ({
-  score,
-  url,
-  title,
-  by,
-  timeISO,
-  descendants,
-  domain,
-}) =>
+const StoryList = ({score, url, title, by, timeISO, descendants, domain}) => (
   <div
     css={{
       alignItems: 'center',
@@ -30,7 +22,7 @@ const StoryList = ({
       padding: '2rem 0',
       width: '100%',
     }}
-    >
+  >
     <div
       css={{
         display: 'inline-block',
@@ -79,12 +71,12 @@ const StoryList = ({
           margin: '0',
         }}
       >
-        {by} - {timeISO} - {descendants || 0} comments {
-          domain && `- (${domain})` || ''
-        }
+        {by} - {timeISO} - {descendants || 0} comments{' '}
+        {(domain && `- (${domain})`) || ''}
       </p>
     </div>
-  </div>;
+  </div>
+);
 
 LinkTag.propTypes = {
   href: PropTypes.string,

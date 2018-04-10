@@ -8,61 +8,57 @@ const PreviousPageNavigation = ({
   currentPage,
   categoryPath,
 }) =>
-  hasPreviousPage ?
-  <Link
-    to={
-      `/${categoryPath}${
-        currentPage - 1 === 1 ?
-        '' :
-        `/${currentPage - 1}`
-      }`
-    }
-    css={{
-      color: '#25ced1',
-      textDecoration: 'none',
-    }}
-  >
-    &lt; Prev
-  </Link> :
-  <p
-    css={{
-      color: '#979797',
-      margin: '0',
-    }}
-  >
-    &lt; Prev
-  </p>;
+  hasPreviousPage ? (
+    <Link
+      to={`/${categoryPath}${
+        currentPage - 1 === 1 ? '' : `/${currentPage - 1}`
+      }`}
+      css={{
+        color: '#25ced1',
+        textDecoration: 'none',
+      }}
+    >
+      &lt; Prev
+    </Link>
+  ) : (
+    <p
+      css={{
+        color: '#979797',
+        margin: '0',
+      }}
+    >
+      &lt; Prev
+    </p>
+  );
 
-const NextPageNavigation = ({
-  hasNextPage,
-  currentPage,
-  categoryPath,
-}) =>
-  hasNextPage ?
-  <Link
-    to={`/${categoryPath}/${currentPage + 1}`}
-    css={{
-      color: '#25ced1',
-      textDecoration: 'none',
-    }}
-  >
-    Next &gt;
-  </Link> :
-  <p
-    css={{
-      color: '#979797',
-      margin: '0',
-    }}
-  >
-    Next &gt;
-  </p>;
+const NextPageNavigation = ({hasNextPage, currentPage, categoryPath}) =>
+  hasNextPage ? (
+    <Link
+      to={`/${categoryPath}/${currentPage + 1}`}
+      css={{
+        color: '#25ced1',
+        textDecoration: 'none',
+      }}
+    >
+      Next &gt;
+    </Link>
+  ) : (
+    <p
+      css={{
+        color: '#979797',
+        margin: '0',
+      }}
+    >
+      Next &gt;
+    </p>
+  );
 
 const Pagination = ({
   hasPreviousPage,
   hasNextPage,
   currentPage,
   categoryPath,
-}) =>
+}) => (
   <div
     css={{
       fontSize: '1.8rem',
@@ -106,7 +102,8 @@ const Pagination = ({
         categoryPath={categoryPath}
       />
     </div>
-  </div>;
+  </div>
+);
 
 Pagination.propTypes = {
   hasNextPage: PropTypes.bool,

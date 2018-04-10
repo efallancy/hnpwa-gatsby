@@ -5,7 +5,7 @@ import Link from './link';
 const links = [
   {
     text: 'HNPWA',
-    url: 'https://www.gatsbyjs.org'
+    url: 'https://www.gatsbyjs.org',
   },
   {
     text: 'TOP',

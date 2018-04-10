@@ -25,9 +25,7 @@ const HackerNewsCategoryTemplate = ({
       currentPage={currentPage}
       categoryPath={categoryPath}
     />
-    {stories.map((story, index) => (
-      <StoryListItem key={index} {...story} />
-    ))}
+    {stories.map((story, index) => <StoryListItem key={index} {...story} />)}
   </div>
 );
 
