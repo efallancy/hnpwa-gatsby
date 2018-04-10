@@ -17,11 +17,10 @@ const TemplateWrapper = ({children}) => (
     />
     <Header />
     <div
-      style={{
+      css={{
         margin: '0 auto',
-        maxWidth: 960,
-        padding: '0px 1.0875rem 1.45rem',
-        paddingTop: 0,
+        maxWidth: '1044px',
+        padding: '0 2rem',
       }}
     >
       {children()}

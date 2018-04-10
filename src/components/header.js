@@ -4,6 +4,10 @@ import Link from './link';
 
 const links = [
   {
+    text: 'HNPWA',
+    url: 'https://www.gatsbyjs.org'
+  },
+  {
     text: 'TOP',
     url: '/top',
   },
@@ -44,6 +48,11 @@ const Header = () => (
             display: 'inline-block',
             fontSize: '1.8rem',
             margin: '0',
+            width: '15rem',
+            '@media (max-width: 992px)': {
+              width: 'auto',
+              marginRight: '5rem',
+            },
           }}
         >
           <Link
@@ -51,7 +60,6 @@ const Header = () => (
             css={{
               color: 'white',
               textDecoration: 'none',
-              marginRight: '15rem',
             }}
           >
             {link.text}

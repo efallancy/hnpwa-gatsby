@@ -123,6 +123,10 @@ const createPaginatedHnCategoryPage = (
     component: path.resolve(templatePath),
     context: {
       stories: paginatedStories,
+      hasNextPage: limit + skip <= stories.length,
+      hasPreviousPage: depth !== 1,
+      currentPage: depth,
+      categoryPath,
     },
   });
 

@@ -7,5 +7,6 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-glamor',
     'gatsby-plugin-offline',
+    'gatsby-plugin-netlify',
   ],
 };
