@@ -65,9 +65,9 @@ const Header = ({location}) => (
           <Link
             to={link.url}
             css={{
-              color: getMatchingPathIndex(link.url, location.pathname) ?
-                '#0274b3' :
-                'white',
+              color: getMatchingPathIndex(link.url, location.pathname)
+                ? '#0274b3'
+                : 'white',
               textDecoration: 'none',
             }}
           >
@@ -81,6 +81,6 @@ const Header = ({location}) => (
 
 Header.propTypes = {
   location: PropTypes.object,
-}
+};
 
 export default Header;

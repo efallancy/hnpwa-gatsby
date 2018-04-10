@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CommentList = ({
-  by,
-  timeISO,
-  text,
-}) =>
+const CommentList = ({by, timeISO, text}) => (
   <div
     css={{
       padding: '1rem 1.5rem',
@@ -34,7 +30,8 @@ const CommentList = ({
     <p>
       <em>{by}</em> - {timeISO}
     </p>
-  </div>;
+  </div>
+);
 
 CommentList.propTypes = {
   text: PropTypes.string,

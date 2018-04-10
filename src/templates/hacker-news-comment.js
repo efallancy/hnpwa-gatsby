@@ -14,11 +14,11 @@ const HackerNewsComment = ({pathContext}) => (
       {pathContext.by} - {pathContext.createdAt}
     </p>
     <div css={{margin: '1rem 0'}}>
-      {
-        pathContext.comments.length ?
+      {pathContext.comments.length ? (
         pathContext.comments.map((comment, index) => (
           <CommentListItem key={index} {...comment} />
-        )) :
+        ))
+      ) : (
         <div
           css={{
             backgroundColor: '#f5f5f5',
@@ -33,7 +33,7 @@ const HackerNewsComment = ({pathContext}) => (
             No comments for this story/post.
           </p>
         </div>
-      }
+      )}
     </div>
   </div>
 );

@@ -82,7 +82,7 @@ const StoryList = ({
           margin: '0',
         }}
       >
-        {by} - {timeISO} - {' '}
+        {by} - {timeISO} -{' '}
         <Link
           to={`/${id}/comments`}
           css={{

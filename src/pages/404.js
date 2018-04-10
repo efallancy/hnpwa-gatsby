@@ -7,9 +7,7 @@ const NotFoundPage = () => (
     }}
   >
     <h1>NOTHING FOUND</h1>
-    <p>
-      Pretend that the page exists for now.
-    </p>
+    <p>Pretend that the page exists for now.</p>
   </div>
 );
 
