@@ -3,6 +3,13 @@ Hacker News app build with GatsbyJS.
 
 Utilising all around (mostly) Gatsby packages.
 
+## Plugins include
+- `gatsby-plugin-glamor`
+- `gatsby-plugin-netlify`
+- `gatsby-plugin-offline`
+- `gatsby-plugin-manifest`
+- `gatsby-plugin-remove-trailing-slashes`
+
 ## Install
 
 Install packages by running:

@@ -39,6 +39,10 @@ const StoryList = ({
         display: 'inline-block',
         padding: '0 1rem 0 2rem',
         width: '85px',
+        '@media (max-width: 485px)': {
+          padding: '0 1rem',
+          width: '60px',
+        },
       }}
     >
       <p
@@ -47,6 +51,9 @@ const StoryList = ({
           fontSize: '2rem',
           fontWeight: 'bold',
           textAlign: 'center',
+          '@media (max-width: 485px)': {
+            fontSize: '1.8rem',
+          },
         }}
       >
         {score}
@@ -56,13 +63,21 @@ const StoryList = ({
       css={{
         display: 'inline-block',
         padding: '0 2rem 0 1rem',
-        width: 'calc(100% - 80px)',
+        width: 'calc(100% - 85px)',
+        '@media (max-width: 485px)': {
+          padding: '0 1rem',
+          width: 'calc(100% - 60px)',
+        },
       }}
     >
       <p
         css={{
           fontSize: '1.8rem',
           marginBottom: '0.6rem',
+          '@media (max-width: 485px)': {
+            fontSize: '1.6rem',
+            lineHeight: '1.33',
+          },
         }}
       >
         <LinkTag
@@ -80,6 +95,9 @@ const StoryList = ({
           color: '#979797',
           lineHeight: '1.5',
           margin: '0',
+          '@media (max-width: 485px)': {
+            fontSize: '1.4rem',
+          },
         }}
       >
         {by} - {timeISO} -{' '}
@@ -88,6 +106,9 @@ const StoryList = ({
           css={{
             color: '#25ced1',
             textDecoration: 'none',
+            '@media (max-width: 485px)': {
+              fontSize: '1.4rem',
+            },
           }}
         >
           {descendants || 0}{' '}

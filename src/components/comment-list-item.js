@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const CommentList = ({by, timeISO, text}) => (
   <div
     css={{
-      padding: '1rem 1.5rem',
+      padding: '1rem 0',
     }}
   >
     <div

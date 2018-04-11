@@ -38,7 +38,7 @@ const createHnNode = (stories, storyCategory, createNode) => {
       const storyNode = {
         ...kidLessStory,
         category: `${storyCategory}HnStory`,
-        children: kids.kids.map((k) => k.id),
+        children: kids.kids.filter((k) => k && k.id).map((k) => k.id),
         parent: `__SOURCE__`,
         content: storyStr,
         internal: {
@@ -72,7 +72,7 @@ const createHnNode = (stories, storyCategory, createNode) => {
             let commentNode = {
               ..._.omit(comment, `kids`),
               category: `${storyCategory}HnComment`,
-              children: comment.kids.map((k) => k.id),
+              children: comment.kids.filter((k) => k && k.id).map((k) => k.id),
               parent,
               internal: {
                 type: `HnComment`,
@@ -174,13 +174,13 @@ exports.sourceNodes = async ({
     newStories(limit: 100) {
       ...storiesFragment
     }
-    showStories(limit: 30) {
+    showStories(limit: 100) {
       ...storiesFragment
     }
-    askStories(limit: 30) {
+    askStories(limit: 100) {
       ...storiesFragment
     }
-    jobStories(limit: 30) {
+    jobStories(limit: 100) {
       ...storiesFragment
     }
   }

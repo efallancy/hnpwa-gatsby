@@ -11,9 +11,17 @@ const HackerNewsComment = ({pathContext}) => (
   >
     <h1>{pathContext.title}</h1>
     <p>
-      {pathContext.by} - {pathContext.createdAt}
+      By {pathContext.by} - {pathContext.createdAt}
     </p>
-    <div css={{margin: '1rem 0'}}>
+    <p
+      css={{
+        fontSize: '15px',
+        margin: '0 0 2rem',
+      }}
+    >
+      <em>Showing first level comment(s)</em>
+    </p>
+    <div css={{margin: '2rem 0'}}>
       {pathContext.comments.length ? (
         pathContext.comments.map((comment, index) => (
           <CommentListItem key={index} {...comment} />

@@ -1,13 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Logo from './logo';
 import Link from './link';
 
 const links = [
-  {
-    text: 'HNPWA',
-    url: 'https://www.gatsbyjs.org',
-  },
   {
     text: 'TOP',
     url: '/top',
@@ -57,8 +54,13 @@ const Header = ({location}) => (
             margin: '0',
             width: '15rem',
             '@media (max-width: 992px)': {
-              width: 'auto',
               marginRight: '5rem',
+              width: 'auto',
+            },
+            '@media (max-width: 600px)': {
+              fontSize: '1.5rem',
+              marginRight: '1.5rem',
+              width: 'auto',
             },
           }}
         >
@@ -66,8 +68,11 @@ const Header = ({location}) => (
             to={link.url}
             css={{
               color: getMatchingPathIndex(link.url, location.pathname)
-                ? '#0274b3'
+                ? '#2b2b2b'
                 : 'white',
+              fontWeight: getMatchingPathIndex(link.url, location.pathname)
+                ? 'bold'
+                : '400',
               textDecoration: 'none',
             }}
           >
@@ -75,6 +80,27 @@ const Header = ({location}) => (
           </Link>
         </p>
       ))}
+      <p
+        css={{
+          display: 'inline-block',
+          margin: 0,
+          float: 'right',
+        }}
+      >
+        <span
+          css={{
+            fontSize: '1.4rem',
+            '@media (max-width: 624px)': {
+              display: 'none',
+            },
+          }}
+        >
+          Built with&nbsp;
+        </span>
+        <Link to="https://github.com/emmafallancy/hnpwa-gatsby">
+          <Logo width="50px" height="15px" />
+        </Link>
+      </p>
     </nav>
   </header>
 );
