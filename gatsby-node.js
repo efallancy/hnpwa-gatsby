@@ -279,7 +279,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
         }
 
         createPage({
-          path: `/${node.id}/comments`,
+          path: `/comment/${node.id}`,
           component: path.resolve(hackerNewsCommentTemplate),
           context: {
             title: node.title,

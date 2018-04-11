@@ -102,7 +102,7 @@ const StoryList = ({
       >
         {by} - {timeISO} -{' '}
         <Link
-          to={`/${id}/comments`}
+          to={`/comment/${id}`}
           css={{
             color: '#25ced1',
             textDecoration: 'none',
