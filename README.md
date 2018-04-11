@@ -3,6 +3,8 @@ Hacker News app build with GatsbyJS.
 
 Utilising all around (mostly) Gatsby packages.
 
+_Still in progress but viewable at_ [Gatsby HNPWA](https://gatsbyhn.netlify.com)
+
 ## Plugins include
 - `gatsby-plugin-glamor`
 - `gatsby-plugin-netlify`
