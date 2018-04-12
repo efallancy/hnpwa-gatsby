@@ -11,7 +11,7 @@ const PreviousPageNavigation = ({
   hasPreviousPage ? (
     <Link
       to={`/${categoryPath}${
-        currentPage - 1 === 1 ? '' : `/${currentPage - 1}`
+        currentPage - 1 === 1 ? '/' : `/${currentPage - 1}/`
       }`}
       css={{
         color: '#25ced1',
@@ -34,7 +34,7 @@ const PreviousPageNavigation = ({
 const NextPageNavigation = ({hasNextPage, currentPage, categoryPath}) =>
   hasNextPage ? (
     <Link
-      to={`/${categoryPath}/${currentPage + 1}`}
+      to={`/${categoryPath}/${currentPage + 1}/`}
       css={{
         color: '#25ced1',
         textDecoration: 'none',

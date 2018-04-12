@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 
 const GatsbyHnLogo = ({width = '620px', height = '256px', css = {}}) => (
   <svg
+    role="img"
     css={{verticalAlign: 'middle'}}
     width={width}
     height={height}
     viewBox="0 0 700 256"
     id="gatsbyhnlogo"
+    aria-labelledby="svgLogoTitle svgLogoDesc"
+    aria-required="true"
   >
+    <title id="svgLogoTitle">Gatsby Hacker News logo</title>
+    <desc id="svgLogoDesc">Logo for Gatsby Hacker News app</desc>
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g id="gatsbyhn" fill="#744C9E">
         <g fillRule="nonzero">

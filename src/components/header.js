@@ -7,23 +7,23 @@ import Link from './link';
 const links = [
   {
     text: 'TOP',
-    url: '/top',
+    url: '/top/',
   },
   {
     text: 'NEW',
-    url: '/new',
+    url: '/new/',
   },
   {
     text: 'SHOW',
-    url: '/show',
+    url: '/show/',
   },
   {
     text: 'ASK',
-    url: '/ask',
+    url: '/ask/',
   },
   {
     text: 'JOB',
-    url: '/job',
+    url: '/job/',
   },
 ];
 
@@ -36,12 +36,15 @@ const getMatchingPathIndex = (url, pathname) => {
 const Header = ({location}) => (
   <header
     css={{
-      backgroundColor: '#25CED1',
+      borderBottom: '1px solid rgba(0, 0, 0, 0.5)',
+      boxShadow: '0 0 8px 0 #979797',
+      marginBottom: '0.8rem',
     }}
   >
     <nav
       css={{
         margin: '0 auto',
+        maxWidth: '1024px',
         padding: '2rem',
       }}
     >
@@ -49,27 +52,23 @@ const Header = ({location}) => (
         <p
           key={index}
           css={{
+            borderBottom: getMatchingPathIndex(link.url, location.pathname)
+              ? '2px solid #25CED1'
+              : 'none',
             display: 'inline-block',
-            fontSize: '1.8rem',
-            margin: '0',
-            width: '15rem',
-            '@media (max-width: 992px)': {
-              marginRight: '5rem',
-              width: 'auto',
-            },
+            fontSize: '1.6rem',
+            margin: '0 5rem 0 0',
+            padding: '0 0 0.5rem',
             '@media (max-width: 600px)': {
               fontSize: '1.5rem',
               marginRight: '1.5rem',
-              width: 'auto',
             },
           }}
         >
           <Link
             to={link.url}
             css={{
-              color: getMatchingPathIndex(link.url, location.pathname)
-                ? '#2b2b2b'
-                : 'white',
+              color: '#2b2b2b',
               fontWeight: getMatchingPathIndex(link.url, location.pathname)
                 ? 'bold'
                 : '400',

@@ -36,6 +36,21 @@ module.exports = class HTML extends React.Component {
         </head>
         <body {...this.props.bodyAttributes}>
           {this.props.preBodyComponents}
+          <div id="skip">
+            <a
+              href="#___gatsby"
+              style={{
+                position: 'absolute',
+                left: '-10000px',
+                top: 'auto',
+                width: '1px',
+                height: '1px',
+                overflow: 'hidden',
+              }}
+            >
+              skip to content
+            </a>
+          </div>
           <div
             key={`body`}
             id="___gatsby"
