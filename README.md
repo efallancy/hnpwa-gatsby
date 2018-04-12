@@ -10,7 +10,6 @@ _Still in progress but viewable at_ [Gatsby HNPWA](https://gatsbyhn.netlify.com)
 - `gatsby-plugin-netlify`
 - `gatsby-plugin-offline`
 - `gatsby-plugin-manifest`
-- `gatsby-plugin-remove-trailing-slashes`
 
 ## Install
 
