@@ -35,6 +35,12 @@ module.exports = class HTML extends React.Component {
             type="image/png"
             sizes="16x16"
           />
+          <link
+            rel="icon"
+            href="/hn-favicon-16x16.png"
+            type="image/png"
+            sizes="16x16"
+          />
           {this.props.headComponents}
           {css}
         </head>
