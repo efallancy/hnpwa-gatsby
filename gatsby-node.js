@@ -9,6 +9,8 @@ const get = (query) =>
     `https://www.graphqlhub.com/graphql?query=${encodeURIComponent(query)}`
   );
 
+// Node creation is pulled in from `gatsby-plugin-source-hacker-news`.
+// Credits to the author. Extending functionality to pull in more resources.
 const createHnNode = (stories, storyCategory, createNode) => {
   stories
     .filter((story) => story !== null && story !== undefined)

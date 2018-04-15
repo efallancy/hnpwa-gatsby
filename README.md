@@ -13,6 +13,7 @@ This is built as a mean of demonstrating on building a Progressive Web App (PWA)
 - `gatsby-plugin-netlify`
 - `gatsby-plugin-offline`
 - `gatsby-plugin-manifest`
+- Extending the `gatsby-plugin-source-hacker-news` plugin to pull in more resources
 
 ## Install
 
